@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Latihan Rasio Kelas 6</title>
+<style>
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#36d1dc,#5b86e5);margin:0;padding:20px}
+.container{max-width:850px;margin:auto;background:#fff;padding:25px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+h1{text-align:center;color:#1565c0}
+.card{background:#f5f9ff;padding:20px;border-radius:15px;margin:15px 0}
+button{background:#1565c0;color:white;border:none;padding:12px 18px;border-radius:10px;cursor:pointer;margin:5px}
+input,select{padding:10px;font-size:16px}
+#feedback{font-size:18px;font-weight:bold;margin-top:10px}
+.score{font-size:20px;color:#1565c0;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎯 Latihan Rasio Kelas 6</h1>
+<div class="score">Skor: <span id="score">0</span></div>
+<p>Pilih tingkat kesulitan, lalu klik <b>Soal Baru</b>.</p>
+<select id="level">
+<option value="easy">Mudah</option>
+<option value="medium">Sedang</option>
+<option value="hard">Sulit</option>
+</select>
+<button onclick="buatSoal()">Soal Baru</button>
+<div class="card">
+<div id="soal">Klik Soal Baru untuk memulai.</div>
+<br>
+<input type="number" id="jawaban" placeholder="Jawaban Anda">
+<button onclick="cekJawaban()">Cek Jawaban</button>
+<div id="feedback"></div>
+</div>
+</div>
+<script>
+let benar=0; let kunci=0;
+function acak(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function buatSoal(){
+const level=document.getElementById('level').value;
+let r1,r2,faktor;
+if(level==='easy'){r1=acak(2,5);r2=acak(2,5);faktor=acak(2,10);} 
+else if(level==='medium'){r1=acak(3,8);r2=acak(2,9);faktor=acak(5,15);} 
+else {r1=acak(4,12);r2=acak(3,12);faktor=acak(10,25);} 
+const tipe=acak(1,4);
+let soal='';
+if(tipe===1){const a=r1*faktor;kunci=r2*faktor;soal=`Rasio laki-laki dan perempuan ${r1}:${r2}. Jika laki-laki ${a} orang, berapa perempuan?`;}
+if(tipe===2){const a=r1*faktor;kunci=r2*faktor;soal=`Rasio kelereng merah dan biru ${r1}:${r2}. Jika merah ${a} buah, berapa biru?`;}
+if(tipe===3){const a=r1*faktor;kunci=r2*faktor;soal=`Rasio umur Andi dan Budi ${r1}:${r2}. Jika umur Andi ${a} tahun, berapa umur Budi?`;}
+if(tipe===4){const a=r1*faktor;kunci=r2*faktor;soal=`Rasio pita A dan pita B ${r1}:${r2}. Jika panjang pita A ${a} cm, berapa panjang pita B?`;}
+ document.getElementById('soal').innerHTML=soal;
+ document.getElementById('jawaban').value='';
+ document.getElementById('feedback').innerHTML='';
+}
+function cekJawaban(){
+const j=parseInt(document.getElementById('jawaban').value);
+if(j===kunci){benar+=10;document.getElementById('score').innerText=benar;document.getElementById('feedback').innerHTML='✅ Benar! Hebat!';}
+else{document.getElementById('feedback').innerHTML='❌ Kurang tepat. Jawaban yang benar: '+kunci;}
+}
+</script>
+</body></html>
